@@ -11,6 +11,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -18,7 +26,10 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+        
+      },
+      "package": "com.anonymous.EducationApp",
+      "permissions": ["android.permission.ACCESS_COURSE_LOCATION,android.permission.INTERNET"]
     },
     "web": {
       "favicon": "./assets/favicon.png"

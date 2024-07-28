@@ -21,9 +21,7 @@ const UserPage = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      console.log('Fetching user data with sessionToken:', sessionToken);
       const response = await getUser(sessionToken);
-      console.log('Fetched user data response:', response);
       if (response.success) {
         setUser(response.data);
         setName(response.data.name || '');
@@ -41,9 +39,7 @@ const UserPage = () => {
   }, [sessionToken]);
 
   const handleUpdate = async () => {
-    console.log('Updating user with data:', { name, email, studentId, contactNumber, address });
     const response = await updateUser(sessionToken, name, email, studentId, contactNumber, address);
-    console.log('Update response:', response);
     if (response.success) {
       alert('Profile updated successfully');
     } else {
@@ -54,7 +50,6 @@ const UserPage = () => {
   return (
     <View style={styles.container}>
       <Header title="User Profile" />
-      <Text style={styles.title}>User Profile</Text>
       {loading ? (
         <Text style={styles.loadingText}>Loading user information...</Text>
       ) : error ? (

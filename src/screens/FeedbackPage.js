@@ -41,7 +41,7 @@ const FeedbackPage = ({ route }) => {
   };
   return (
     <View style={styles.container}>
-      <Header title="Feedback" />
+      <Header title="Submit Feedback" />
       <Text style={styles.title}>Submit Feedback</Text>
       <TextInput
         style={styles.input}

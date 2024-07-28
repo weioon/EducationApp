@@ -10,6 +10,7 @@ import AddDropCoursePage from './src/screens/AddDropCoursePage';
 import FeedbackPage from './src/screens/FeedbackPage';
 import UserPage from './src/screens/UserPage';
 import WeatherPage from './src/screens/WeatherPage';
+import GetFeedbackPage from './src/screens/GetFeedbackPage';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ const App = () => {
         <Stack.Screen name="Feedback" component={FeedbackPage} />
         <Stack.Screen name="User" component={UserPage} />
         <Stack.Screen name="Weather" component={WeatherPage} />
+        <Stack.Screen name="GetFeedbackPage" component={GetFeedbackPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

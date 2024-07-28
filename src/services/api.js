@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost/edu_app_server'; // Replace with your actual API URL
+const API_URL = 'http://192.168.137.1/edu_app_server'; // Replace with your actual API URL
 
 export const login = async (email, password) => {
   try {
@@ -48,7 +48,7 @@ export const signup = async (name, email, studentId, password, phoneNumber, addr
 
 export const forgetPassword = async (email, securityAnswer) => {
   try {
-    const response = await axios.post([`${API_URL}/forget-password.php`] , { email, securityAnswer });
+    const response = await axios.post(`${API_URL}/forget-password.php` , { email, securityAnswer });
     console.log('Forget Password response:', response.data); // Add this line for debugging
     return response.data;
   } catch (error) {
@@ -115,6 +115,7 @@ export const dropCourse = async (sessionToken, courseName) => {
   }
 };
 
+
 export const submitFeedback = async (sessionToken, feedback, photo) => {
   const formData = new FormData();
   formData.append('id', sessionToken);
@@ -141,6 +142,7 @@ export const submitFeedback = async (sessionToken, feedback, photo) => {
 };
 
 
+
 export const getUser = async (userId) => {
   try {
     const response = await axios.get(`${API_URL}/user.php?userId=${userId}`);
@@ -154,7 +156,7 @@ export const getUser = async (userId) => {
 
 export const updateUser = async (sessionToken, name, email, studentId, contactNumber, address) => {
   try {
-    const response = await axios.put([`${API_URL}/edit_user.php`] , {
+    const response = await axios.put(`${API_URL}/edit_user.php` , {
       id: sessionToken, // Assuming sessionToken is the user ID
       name,
       email,
@@ -188,16 +190,31 @@ export const getCoursesAndSchedules = async (sessionToken) => {
   }
 };
 
+
 export const getUserCourses = async (sessionToken) => {
   try {
-    const response = await axios.get(`${API_URL}/get_user_courses.php`, {
-      headers: {
-        'Authorization': `Bearer ${sessionToken}`
-      }
-    });
+    console.log('Making API call to get user courses with token:', sessionToken);
+    const response = await axios.get(`${API_URL}/get_user_courses.php?token=${sessionToken}`);
+    console.log('API response:', response.data);
     return response.data;
   } catch (error) {
+    console.error('API error:', error);
     return { success: false, message: error.message };
   }
 };
 
+export const getFeedbacks = async (sessionToken) => {
+  try {
+    console.log('Making API call to get user feedbacks with token:', sessionToken);
+    const response = await axios.get(`${API_URL}/get_feedbacks.php`, {
+      headers: {
+        Authorization: `Bearer ${sessionToken}`,
+      },
+    });
+    console.log('API response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('API error:', error);
+    return { success: false, message: error.response ? error.response.data : error.message };
+  }
+};

@@ -16,7 +16,6 @@ const ForgetPasswordPage = () => {
 
   const handleVerify = async () => {
     const response = await forgetPassword(email, securityAnswer);
-    console.log('Verify response:', response); // Add this line for debugging
     if (response.success) {
       setMessage('Verification successful. Enter your new password.');
       setResetMode(true);
@@ -27,7 +26,6 @@ const ForgetPasswordPage = () => {
 
   const handleResetPassword = async () => {
     const response = await resetPassword(email, newPassword);
-    console.log('Reset Password response:', response); // Add this line for debugging
     if (response.success) {
       setMessage('Password reset successfully.');
       navigation.navigate('Login');

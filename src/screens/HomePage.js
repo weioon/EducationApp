@@ -29,12 +29,10 @@ const HomePage = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Header title="Home" />
-      <Text style={styles.title}>Welcome Home!</Text>
+      <Header styles={styles.title} title="Welcome Home" />
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          console.log('Navigating to CourseScheduleDisplay with sessionToken:', sessionToken);
           navigation.navigate('CourseScheduleDisplay', { userId, sessionToken });
         }}
       >
@@ -43,7 +41,6 @@ const HomePage = ({ route }) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          console.log('Navigating to AddDropCourse with sessionToken:', sessionToken);
           navigation.navigate('AddDropCourse', { userId, sessionToken });
         }}
       >
@@ -52,16 +49,22 @@ const HomePage = ({ route }) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          console.log('Navigating to Feedback with sessionToken:', sessionToken);
           navigation.navigate('Feedback', { userId, sessionToken });
         }}
       >
-        <Text style={styles.buttonText}>Give Feedback</Text>
+        <Text style={styles.buttonText}>Submit Feedback</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          console.log('Navigating to User with sessionToken:', sessionToken);
+          navigation.navigate('GetFeedbackPage', { userId, sessionToken });
+        }}
+      >
+        <Text style={styles.buttonText}>Check Feedback Submitted</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
           navigation.navigate('User', { userId, sessionToken });
         }}
       >
@@ -70,7 +73,6 @@ const HomePage = ({ route }) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          console.log('Navigating to Weather with sessionToken:', sessionToken);
           navigation.navigate('Weather', { sessionToken });
         }}
       >

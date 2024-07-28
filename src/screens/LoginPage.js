@@ -16,7 +16,6 @@ const LoginPage = () => {
   const handleLogin = async () => {
     try {
       const response = await login(email, password);
-      console.log('Login response:', response); // Add this line for debugging
       if (response.success) {
         // Save session token
         await AsyncStorage.setItem('sessionToken', response.sessionToken);
@@ -26,18 +25,16 @@ const LoginPage = () => {
         setError(response.message || 'Invalid credentials');
       }
     } catch (error) {
-      console.error('Login error:', error); // Add this line for debugging
       setError('An error occurred. Please try again.');
     }
   };
   
   return (
     <View style={styles.container}>
-      <Header title="Login" />
-      <Text style={styles.title}>Login</Text>
+      <Header style={{ marginBottom: 20 }} title="Login" />
       {error ? <Text style={{ color: 'red' }}>{error}</Text> : null}
       <TextInput
-        style={styles.input}
+        style={styles.input } 
         placeholder="Email"
         value={email}
         onChangeText={setEmail}

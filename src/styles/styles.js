@@ -8,20 +8,22 @@ export default StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    marginBottom: 16,
+    marginBottom: 20,
     textAlign: 'center',
     fontWeight: 'bold',
     color: '#333',
   },
+
   input: {
     height: 40,
     borderColor: '#ccc',
     borderWidth: 1,
     marginBottom: 12,
+    marginTop: 12,
     paddingHorizontal: 8,
   },
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#087FFF',
     padding: 12,
     marginVertical: 8,
     borderRadius: 5,
@@ -124,7 +126,7 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#FC9621',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
@@ -138,7 +140,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 10,
-    backgroundColor: '#f1f1f1',
+    backgroundColor: '#FFFFFF',
   },
   tableHeaderCell: {
     fontWeight: 'bold',

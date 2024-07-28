@@ -19,16 +19,13 @@ const SignupPage = () => {
 
   const handleSignup = async () => {
     try {
-      console.log('Sending signup data:', { name, email, studentId, password, phoneNumber, address, securityAnswer });
       const response = await signup(name, email, studentId, password, phoneNumber, address, securityAnswer);
-      console.log('Signup response:', response); // Log the response
       if (response.status === 'success') {
         navigation.navigate('Login');
       } else {
         setError(response.message || 'Signup failed');
       }
     } catch (err) {
-      console.error('Signup error:', err); // Log any errors
       setError('Signup failed');
     }
   };

@@ -31,7 +31,6 @@ const WeatherPage = () => {
         setLocationName(response.data.name);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching weather data:', err);
         setError('Failed to fetch weather data');
         setLoading(false);
       }
@@ -58,12 +57,11 @@ const WeatherPage = () => {
       Geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setLatitude(latitude);
+          setLatitude(latitude);0
           setLongitude(longitude);
           fetchWeather(latitude, longitude);
         },
         (error) => {
-          console.error('Error getting location:', error);
           setError('Failed to get location');
           setLoading(false);
         },
@@ -108,9 +106,9 @@ const WeatherPage = () => {
 
   return (
     <View style={styles.container}>
-      <Header title="Weather" />
+      <Header title="Current Weather" />
       <View style={styles.content}>
-        <Text style={styles.title}>Current Weather</Text>
+       
         {renderWeatherInfo()}
       </View>
       <Footer />

@@ -17,19 +17,24 @@ const CourseScheduleDisplayPage = ({ route }) => {
     const fetchCourses = async () => {
       try {
         const response = await getUserCourses(sessionToken);
+        
+  
         if (response.success) {
+          
           setCourses(response.data);
           setFilteredCourses(response.data);
         } else {
+          
           setError('Failed to load courses.');
         }
       } catch (err) {
+     
         setError('An error occurred while fetching courses.');
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchCourses();
   }, [sessionToken]);
 
@@ -49,11 +54,26 @@ const CourseScheduleDisplayPage = ({ route }) => {
     setSearchQuery('');
   };
 
+  const fetchCourses = async () => {
+    try {
+    
+      const response = await getUserCourses(sessionToken);
+      
+  
+      // Additional code...
+    } catch (err) {
+    }
+  };
+  
+  // Ensure sessionToken is defined before using it
+  if (sessionToken) {
+    fetchCourses();
+  } else {
+  }
+
   const handleDropCourse = async (courseName) => {
-    console.log(`Attempting to drop course: ${courseName}`);
     try {
       const response = await dropCourse(sessionToken, courseName);
-      console.log('Drop course response:', response);
       if (response.success) {
         setCourses(prevCourses => prevCourses.filter(course => course.name !== courseName));
         setFilteredCourses(prevFilteredCourses => prevFilteredCourses.filter(course => course.name !== courseName));
@@ -62,7 +82,6 @@ const CourseScheduleDisplayPage = ({ route }) => {
         setError(`Failed to drop course: ${response.message}`);
       }
     } catch (err) {
-      console.error('Error dropping course:', err);
       setError(`An error occurred while dropping the course: ${err.message}`);
     }
   };
@@ -82,7 +101,7 @@ const CourseScheduleDisplayPage = ({ route }) => {
   return (
     <View style={styles.container}>
       <Header title="View Current Timetable / Drop Course" />
-      <Text style={styles.title}>View Current Timetable / Drop Course</Text>
+      
 
       <View style={styles.searchContainer}>
         <TextInput

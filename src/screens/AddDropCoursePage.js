@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Picker, TouchableOpacity, Alert, FlatList } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { addCourse, getCoursesAndSchedules } from '../services/api';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -16,53 +16,37 @@ const AddDropCoursePage = ({ route }) => {
   const itemsPerPage = 5;
 
   useEffect(() => {
-    console.log('Received sessionToken:', sessionToken); // Log the sessionToken
     const fetchCoursesAndSchedules = async () => {
-      console.log('Fetching courses and schedules...');
       const response = await getCoursesAndSchedules(sessionToken); // Pass sessionToken to getCoursesAndSchedules
-      console.log('API response:', response);
       if (response.status === 'success') {
         setCourses(response.data);
       } else {
-        console.error('Failed to fetch courses and schedules:', response.message || 'Unknown error');
+        setMessage('Failed to fetch courses and schedules.');
       }
     };
     fetchCoursesAndSchedules();
   }, [sessionToken]);
 
   const handleAddCourse = async (course) => {
-    console.log('Attempting to add course:', course);
     const duplicate = existingCourses.some(existingCourse => existingCourse.name === course.course_name);
     const scheduleConflict = existingCourses.some(existingCourse => existingCourse.schedule === course.schedule);
   
     if (duplicate) {
       setMessage('Course already added.');
-      console.log('Course already added.');
     } else if (scheduleConflict) {
       setMessage('Schedule conflict with another course.');
-      console.log('Schedule conflict with another course.');
     } else {
       try {
-        // Log the data being posted
-        console.log('Posting data:', {
-          sessionToken,
-          course_name: course.course_name,
-          schedule: course.schedule
-        });
-  
         // Ensure sessionToken, course name, and schedule are posted
         const response = await addCourse(sessionToken, course.course_name, course.schedule);
-        console.log('Add course response:', response);
         if (response.success) {
           setMessage('Course added successfully');
           setExistingCourses([...existingCourses, { name: course.course_name, schedule: course.schedule }]);
         } else {
-          setMessage('Failed to add course');
-          console.log('Failed to add course:', response.message);
+          setMessage('Failed to add course.');
         }
       } catch (error) {
         setMessage('Failed to add course');
-        console.error('Error adding course:', error);
       }
     }
   };
@@ -96,7 +80,6 @@ const AddDropCoursePage = ({ route }) => {
   return (
     <View style={styles.container}>
       <Header title="View Course Schedule / Add Courses" />
-      <Text style={styles.title}>View Course Schedule / Add Courses</Text>
 
       <FlatList
         data={paginatedCourses}
