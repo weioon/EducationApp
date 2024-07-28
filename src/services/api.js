@@ -98,12 +98,15 @@ export const addCourse = async (sessionToken,name, schedule) => {
 export const dropCourse = async (sessionToken, courseName) => {
   try {
     console.log('Dropping course:', { sessionToken, courseName });
-    const response = await axios.post(`${API_URL}/drop_course.php`, { sessionToken, courseName }, {
-      headers: {
-        'Authorization': `Bearer ${sessionToken}`,
-        'Content-Type': 'application/json'
+    const response = await axios.post(`${API_URL}/drop_course.php`, 
+      { sessionToken, courseName },
+      {
+        headers: {
+          'Authorization': `Bearer ${sessionToken}`,
+          'Content-Type': 'application/json'
+        }
       }
-    });
+    );
     console.log('Drop course API response:', response.data);
     return response.data;
   } catch (error) {

@@ -55,8 +55,9 @@ const CourseScheduleDisplayPage = ({ route }) => {
       const response = await dropCourse(sessionToken, courseName);
       console.log('Drop course response:', response);
       if (response.success) {
-        setCourses(courses.filter(course => course.name !== courseName));
-        setFilteredCourses(filteredCourses.filter(course => course.name !== courseName));
+        setCourses(prevCourses => prevCourses.filter(course => course.name !== courseName));
+        setFilteredCourses(prevFilteredCourses => prevFilteredCourses.filter(course => course.name !== courseName));
+        // You might want to show a success message to the user here
       } else {
         setError(`Failed to drop course: ${response.message}`);
       }
