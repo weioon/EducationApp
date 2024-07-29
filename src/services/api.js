@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://192.168.137.1/edu_app_server'; // Replace with your actual API URL
+const API_URL = 'http://localhost/edu_app_server'; // Replace with your actual API URL
 
 export const login = async (email, password) => {
   try {
